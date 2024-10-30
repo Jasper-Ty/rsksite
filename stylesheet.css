@@ -1,0 +1,45 @@
+:root {
+    --main-bg-color: #EEEEEE;
+    --main-fg-color: #222222;
+}
+
+body {
+    margin: auto;
+    padding: 40px;
+    max-width: 600px;
+    line-height: 1.6;
+    font-family: monospace; 
+    font-size: 18px;
+    background-color: var(--main-bg-color);
+    color: var(--main-fg-color);
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+}
+
+a {
+    color: var(--main-fg-color);
+}
+
+hr {
+    border: 1px solid var(--main-fg-color);
+}
+
+.viewport {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+.box {
+    transition: all 1s ease;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    background-color: white;
+    border: 2px solid var(--main-fg-color);
+}
