@@ -2,14 +2,14 @@
   "name": "tableaux",
   "version": "1.0.0",
   "description": "This is a work-in-progress collection of little widgets related to Young tableaux",
-  "main": "script.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "webpack",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jasper Ty",
   "license": "ISC",
   "devDependencies": {
     "gh-pages": "^6.2.0",
