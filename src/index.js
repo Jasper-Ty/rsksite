@@ -1,16 +1,32 @@
 const num_input = document.getElementById("num_input");
-const ptxt = document.getElementById("ptxt");
 
-const viewport = document.getElementById("viewport");
+const Pdiv = document.getElementById("Pdiv");
+const Qdiv = document.getElementById("Qdiv");
 
 const word = []; 
 
-const boxes = [[]];
+const Pboxes = [[]];
+const Qboxes = [[]];
+
+class Box {
+  constructor(val, pos) {
+    this.val = val;
+    this.pos = pos;
+  }
+}
 
 function render_boxes() {
-  for (let i = 0; i < boxes.length; i++) {
-    for (let j = 0; j < boxes[i].length; j++) {
-      const { div, val } = boxes[i][j];
+  for (let i = 0; i < Pboxes.length; i++) {
+    for (let j = 0; j < Pboxes[i].length; j++) {
+      const { div, val } = Pboxes[i][j];
+      div.innerText = val;
+      div.style.top = `${i*52}px`;
+      div.style.left = `${j*52}px`;
+    }
+  }
+  for (let i = 0; i < Qboxes.length; i++) {
+    for (let j = 0; j < Qboxes[i].length; j++) {
+      const { div, val } = Qboxes[i][j];
       div.innerText = val;
       div.style.top = `${i*52}px`;
       div.style.left = `${j*52}px`;
@@ -21,21 +37,21 @@ function render_boxes() {
 function insert_in_row(i, box) {
   console.log("Inserting", box);
   console.log("Row", i);
-  if (boxes.length <= i) {
+  if (Pboxes.length <= i) {
     // First box in row
-    boxes[i] = [box];
+    Pboxes[i] = [box];
     return null;
   }
-  for (let j = 0; j < boxes[i].length; j++) {
+  for (let j = 0; j < Pboxes[i].length; j++) {
     // If found bumpable element
-    if (box.val < boxes[i][j].val) {
-      old = boxes[i][j];
-      boxes[i][j] = box;
+    if (box.val < Pboxes[i][j].val) {
+      old = Pboxes[i][j];
+      Pboxes[i][j] = box;
       return old;
     }
   }
   // Otherwise, insert at the end
-  boxes[i].push(box);
+  Pboxes[i].push(box);
   return null
 }
 
@@ -55,7 +71,7 @@ function insert(val) {
   }
 
   div.classList.add('box')
-  viewport.appendChild(div);
+  Pdiv.appendChild(div);
   render_boxes()
 }
 
