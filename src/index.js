@@ -1,12 +1,24 @@
-const num_input = document.getElementById("num_input");
+import style from './style.css'
 
-const Pdiv = document.getElementById("Pdiv");
-const Qdiv = document.getElementById("Qdiv");
+const title_text = document.createElement('h1');
+title_text.innerText = 'Schensted insertion';
+document.body.appendChild(title_text);
+
+const num_input = document.createElement('input');
+num_input.type = 'number';
+num_input.min = '1';
+num_input.max = '99';
+num_input.style.width = '100px';
+document.body.appendChild(num_input);
+
+const tableau_div = document.createElement('div');
+tableau_div.classList.add('tableaucontainer');
+document.body.appendChild(tableau_div);
+
 
 const word = []; 
 
-const Pboxes = [[]];
-const Qboxes = [[]];
+const boxes = [[]];
 
 class Box {
   constructor(val, pos) {
@@ -16,17 +28,9 @@ class Box {
 }
 
 function render_boxes() {
-  for (let i = 0; i < Pboxes.length; i++) {
-    for (let j = 0; j < Pboxes[i].length; j++) {
-      const { div, val } = Pboxes[i][j];
-      div.innerText = val;
-      div.style.top = `${i*52}px`;
-      div.style.left = `${j*52}px`;
-    }
-  }
-  for (let i = 0; i < Qboxes.length; i++) {
-    for (let j = 0; j < Qboxes[i].length; j++) {
-      const { div, val } = Qboxes[i][j];
+  for (let i = 0; i < boxes.length; i++) {
+    for (let j = 0; j < boxes[i].length; j++) {
+      const { div, val } = boxes[i][j];
       div.innerText = val;
       div.style.top = `${i*52}px`;
       div.style.left = `${j*52}px`;
@@ -37,21 +41,21 @@ function render_boxes() {
 function insert_in_row(i, box) {
   console.log("Inserting", box);
   console.log("Row", i);
-  if (Pboxes.length <= i) {
+  if (boxes.length <= i) {
     // First box in row
-    Pboxes[i] = [box];
+    boxes[i] = [box];
     return null;
   }
-  for (let j = 0; j < Pboxes[i].length; j++) {
+  for (let j = 0; j < boxes[i].length; j++) {
     // If found bumpable element
-    if (box.val < Pboxes[i][j].val) {
-      old = Pboxes[i][j];
-      Pboxes[i][j] = box;
+    if (box.val < boxes[i][j].val) {
+      const old = boxes[i][j];
+      boxes[i][j] = box;
       return old;
     }
   }
   // Otherwise, insert at the end
-  Pboxes[i].push(box);
+  boxes[i].push(box);
   return null
 }
 
@@ -71,7 +75,7 @@ function insert(val) {
   }
 
   div.classList.add('box')
-  Pdiv.appendChild(div);
+  tableau_div.appendChild(div);
   render_boxes()
 }
 
@@ -84,3 +88,4 @@ num_input.addEventListener("keypress", function(event) {
     }
   }
 }); 
+
