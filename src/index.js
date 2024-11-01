@@ -11,10 +11,20 @@ num_input.max = '99';
 num_input.style.width = '100px';
 document.body.appendChild(num_input);
 
+const word_div = document.createElement('div');
+document.body.appendChild(word_div);
+const word_title = document.createElement('h2');
+const word_container = document.createElement('div');
+word_div.appendChild(word_title);
+word_div.appendChild(word_container);
+word_title.innerText = 'Word';
+
+const tableau_title = document.createElement('h2');
+tableau_title.innerText = 'Insertion tableau';
 const tableau_div = document.createElement('div');
 tableau_div.classList.add('tableaucontainer');
+document.body.appendChild(tableau_title);
 document.body.appendChild(tableau_div);
-
 
 const word = []; 
 
@@ -36,6 +46,11 @@ function render_boxes() {
       div.style.left = `${j*52}px`;
     }
   }
+}
+
+function render_word() {
+  const concat = word.join(', ');
+  word_container.innerText = '[' + concat + ']';
 }
 
 function insert_in_row(i, box) {
@@ -83,9 +98,10 @@ num_input.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     if (this.value) {
       event.preventDefault();
-      insert(parseInt(this.value))
-      this.value = ""
+      insert(parseInt(this.value));
+      word.push(this.value);
+      render_word();
+      this.value = "";
     }
   }
 }); 
-
